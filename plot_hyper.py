@@ -19,18 +19,17 @@ f1 = [72.62,	76.77,	78.78]
 mean = [0.0027,	0.2540,	1.3269]
 emd = [0.0306,	0.2533,	0.5379]
 '''
-plt.plot(['10', '1', '0.1'], auroc, marker = markers[0], color=colors[1], linestyle=dash)
-plt.plot(['10', '1', '0.1'], auprc, marker = markers[0], color=colors[2], linestyle=dash)
-plt.plot(['10', '1', '0.1'], acc, marker = markers[0], color=colors[3], linestyle=dash)
-plt.plot(['10', '1', '0.1'], f1, marker = markers[0], color=colors[4], linestyle=dash)
+per = [auroc, auprc, acc, f1]
+for i in range(len(auroc)):
+  plt.plot(['10', '1', '0.1'], per[i], marker = markers[i], color=colors[i], linestyle=dash)
 
 label_row = ['DNT','DRINT','DGNT']
 #label_column = ['100% Data', '20% Data','10% Data','5% Data']
 rows = [mpatches.Patch(color=colors[i]) for i in range(3)]
-columns = [plt.plot([], [], markers[i], markerfacecolor='w', markeredgecolor='k')[0] for i in range(4)]
-plt.legend(rows + columns, label_row + label_column, loc='best', fancybox=True, framealpha=0.5, prop={'size': 8})
+#columns = [plt.plot([], [], markers[i], markerfacecolor='w', markeredgecolor='k')[0] for i in range(4)]
+plt.legend(rows, label_row, loc='best', fancybox=True, framealpha=0.5, prop={'size': 8})
 
-plt.title('λ Sensitivity on PACS Data Set')
+plt.title('α sensitivity on CelebA dataset')
 plt.xlabel('α')
-plt.ylabel('Average Accuracy% ')
+plt.ylabel('Performance')
 plt.savefig('hyper.png', bbox_inches="tight")
